@@ -1,0 +1,14 @@
+services:
+  dummy-data-generator:
+    container_name: c_dummy_data
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 4242:5000
+    networks:
+      - listenAndReporting-net
+networks:
+  listenAndReporting-net:
+    name: listening-reporting-app
+    driver: bridge
