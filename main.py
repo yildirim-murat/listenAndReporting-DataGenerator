@@ -10,6 +10,86 @@ CORS(app)
 
 
 # CORS(app, resources={r"/dummy-data": {"origins": "http://localhost:3000"}})
+def generate_dummy_staff_statistic():
+    staff_name = "Staff One"
+    call_listen_av_1=random.randint(1,1000)
+    call_listen_av_2=random.randint(1,1000)
+    call_listen_av_3=random.randint(1,1000)
+    call_listen_av_4=random.randint(1,1000)
+    call_listen_av_5=random.randint(1,1000)
+    call_listen_av_6=random.randint(1,1000)
+    call_listen_av_7=random.randint(1,1000)
+    call_listen_av_8=random.randint(1,1000)
+    call_listen_av_9=random.randint(1,1000)
+    call_listen_av_10=random.randint(1,1000)
+    call_listen_av_11=random.randint(1,1000)
+    call_listen_av_12=random.randint(1,1000)
+    call_listen_1=random.randint(1,1000)
+    call_listen_2=random.randint(1,1000)
+    call_listen_3=random.randint(1,1000)
+    call_listen_4=random.randint(1,1000)
+    call_listen_5=random.randint(1,1000)
+    call_listen_6=random.randint(1,1000)
+    call_listen_7=random.randint(1,1000)
+    call_listen_8=random.randint(1,1000)
+    call_listen_9=random.randint(1,1000)
+    call_listen_10=random.randint(1,1000)
+    call_listen_11=random.randint(1,1000)
+    call_listen_12=random.randint(1,1000)
+    call_listen_duration_1=random.randint(1,5000)
+    call_listen_duration_2=random.randint(1,5000)
+    call_listen_duration_3=random.randint(1,5000)
+    call_listen_duration_4=random.randint(1,5000)
+    call_listen_duration_5=random.randint(1,5000)
+    call_listen_duration_6=random.randint(1,5000)
+    call_listen_duration_7=random.randint(1,5000)
+    call_listen_duration_8=random.randint(1,5000)
+    call_listen_duration_9=random.randint(1,5000)
+    call_listen_duration_10=random.randint(1,5000)
+    call_listen_duration_11=random.randint(1,5000)
+    call_listen_duration_12=random.randint(1,5000)
+
+    data = {
+       "staff_name": staff_name,
+        "call_listen_av_1": call_listen_av_1,
+        "call_listen_av_2": call_listen_av_2,
+        "call_listen_av_3": call_listen_av_3,
+        "call_listen_av_4": call_listen_av_4,
+        "call_listen_av_5": call_listen_av_5,
+        "call_listen_av_6": call_listen_av_6,
+        "call_listen_av_7": call_listen_av_7,
+        "call_listen_av_8": call_listen_av_8,
+        "call_listen_av_9": call_listen_av_9,
+        "call_listen_av_10": call_listen_av_10,
+        "call_listen_av_11": call_listen_av_11,
+        "call_listen_av_12": call_listen_av_12,
+        "call_listen_1": call_listen_1,
+        "call_listen_2": call_listen_2,
+        "call_listen_3": call_listen_3,
+        "call_listen_4": call_listen_4,
+        "call_listen_5": call_listen_5,
+        "call_listen_6": call_listen_6,
+        "call_listen_7": call_listen_7,
+        "call_listen_8": call_listen_8,
+        "call_listen_9": call_listen_9,
+        "call_listen_10": call_listen_10,
+        "call_listen_11": call_listen_11,
+        "call_listen_12": call_listen_12,
+        "call_listen_duration_1": call_listen_duration_1,
+        "call_listen_duration_2": call_listen_duration_2,
+        "call_listen_duration_3": call_listen_duration_3,
+        "call_listen_duration_4": call_listen_duration_4,
+        "call_listen_duration_5": call_listen_duration_5,
+        "call_listen_duration_6": call_listen_duration_6,
+        "call_listen_duration_7": call_listen_duration_7,
+        "call_listen_duration_8": call_listen_duration_8,
+        "call_listen_duration_9": call_listen_duration_9,
+        "call_listen_duration_10": call_listen_duration_10,
+        "call_listen_duration_11": call_listen_duration_11,
+        "call_listen_duration_12": call_listen_duration_12,
+    }
+    yield data
+
 
 def generate_dummy_statistic():
     max_staff = 14
@@ -208,6 +288,12 @@ def get_dummy_data():
 def get_dummy_statistics():
     dummy_data = list(generate_dummy_statistic())
     return jsonify(dummy_data)
+
+
+@app.route("/dummy-staff-statistic", methods=['GET'])
+def get_dummy_staff_statistic():
+    dummy_staff_statistic = list(generate_dummy_staff_statistic())
+    return jsonify(dummy_staff_statistic)
 
 
 if __name__ == '__main__':
