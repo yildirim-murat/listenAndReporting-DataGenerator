@@ -1,6 +1,6 @@
 services:
   dummy-data-generator:
-    container_name: c_dummy_data
+    container_name: c_dummy_data_v2
     build:
       context: .
       dockerfile: Dockerfile
