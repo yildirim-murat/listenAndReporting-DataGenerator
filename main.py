@@ -4,7 +4,6 @@ import random
 import time
 from flask_cors import CORS
 
-
 app = Flask(__name__)
 CORS(app)
 
@@ -35,7 +34,7 @@ def department_generate():
     data = {}
     for i in department:
         data1 = nu_generate(10000, 90000)
-        data2 = nu_generate(10, 1000)
+        data2 = nu_generate(1000, 90000)
         data3 = nu_generate(0, 100)
         data[i] = [data1, data2, data3, data3]
     return data
@@ -149,6 +148,28 @@ def generate_staff_dummy_statistic():
         yield data
 
 
+def generate_called_list():
+    staff_name = 'Staff ' + str(random.randint(100, 299))
+    called_nu = "0" + str(random.randint(5300000000, 5499999999))
+    call_time = time.strftime("%d/%m/%Y %H:%M:%S", time.localtime(time.time()))
+    duration = nu_generate(0, 100)
+    return (staff_name, called_nu, call_time, duration)
+
+
+def generate_dummy_called_list():
+    data =[]
+    for i in range(1, 1000):
+        record = {
+            'id': i,
+            'staff_name': generate_called_list()[0],
+            'called_nu': generate_called_list()[1],
+            'call_time': generate_called_list()[2],
+            'duration': generate_called_list()[3]
+        }
+        data.append(record)
+    return data
+
+
 @app.route("/dummy-dashboard-statistics", methods=['GET'])
 def get_dummy_dashboard_statistics():
     dummy_data = list(generate_dashboard_dummy_statistic())
@@ -161,81 +182,10 @@ def get_dummy_staff_statistics():
     return jsonify(dummy_data)
 
 
-#
-#
-# def generate_dummy_staff_statistic():
-#     staff_name = "Staff One"
-#
-#     data = {
-#         "staff_information": {
-#             "name": staff_name,
-#             "phone": "05" + nu_generate(300000000, 499999999),
-#             "address": random.choices["Keçiören", "Çankaya", "Yenimahalle", "Altındağ", "Mamak"],
-#             "title": random.choices["Memur", "Görevlendirme", "İşçi"],
-#         },
-#         "work_information": {
-#             "moon": {
-#                 "Ocak": nu_generate(0, 22),
-#             }
-#         }
-#
-#     }
-#     yield data
-#
-#
-# @app.route("/dummy-staff-statistic", methods=['GET'])
-# def get_dummy_staff_statistic():
-#     dummy_staff_statistic = list(generate_dummy_staff_statistic())
-#     return jsonify(dummy_staff_statistic)
-#
-#
-# def generate_dummy_data():
-#     for _ in range(2000):
-#         ucid = ''.join(random.choices('0123456789', k=20))
-#         arayan_numara = '05' + ''.join(random.choices('0123456789', k=9))
-#         aranan_numara = '03' + ''.join(random.choices('0123456789', k=9))
-#         random_nu = ''.join(random.choices('0123456789', k=1))
-#         baslangic_zamani = time.strftime("%d/%m/%Y %H:%M:%S", time.localtime(int(time.time()) + int(random_nu)))
-#         random_nu = ''.join(random.choices('0123456789', k=3))
-#         bitis_zamani = time.strftime("%d/%m/%Y %H:%M:%S", time.localtime(int(time.time()) + int(random_nu)))
-#         vdn = ''.join(random.choices('0123456789', k=7))
-#         operator = random.choice(["TURKCELL", "VODAFONE", "TURKTELEKOM"])
-#         gelen_arama_tipi = random.choice(["Diger", "Simkartli"])
-#         sonlandirma_nedeni = random.choice(["Vaka İhbari", "-"])
-#         arama_tipi = random.choice(["Gelen Arama", "Giden Arama"])
-#         vaka_numarasi = random.choice([str(random.randint(10000000, 99999999)), "-"])
-#         dosya_adi = ''.join(random.choices('0123456789', k=8))
-#         agent = 'Staff ' + str(random.randint(100, 299))
-#         audio_url = random.choice(["https://soundbible.com/mp3/airplane-landing_daniel_simion.mp3",
-#                                    "https://soundbible.com/mp3/cartoon-birds-2_daniel-simion.mp3",
-#                                    "https://soundbible.com/mp3/bells-tibetan-daniel_simon.mp3",
-#                                    "https://soundbible.com/mp3/soundbible-person-whistling-at-girl-daniel_simon.mp3",
-#                                    "https://soundbible.com/mp3/analog-watch-alarm_daniel-simion.mp3",
-#                                    "https://soundbible.com/mp3/baby-music-box_daniel-simion.mp3"])
-#
-#         data = {
-#             "ucid": ucid,
-#             "caller_nu": arayan_numara,
-#             "dialled_nu": aranan_numara,
-#             "start_time": baslangic_zamani,
-#             "finish_time": bitis_zamani,
-#             "vdn": vdn,
-#             "operator_name": operator,
-#             "incoming_call_type": gelen_arama_tipi,
-#             "termination_reason": sonlandirma_nedeni,
-#             "call_type": arama_tipi,
-#             "event_nu": vaka_numarasi,
-#             "file_name": dosya_adi,
-#             "agent": agent,
-#             "audio_url": audio_url
-#         }
-#         yield data
-#
-#
-# @app.route('/dummy-data', methods=['GET'])
-# def get_dummy_data():
-#     dummy_data = list(generate_dummy_data())
-#     return jsonify(dummy_data)
+@app.route("/dummy-called-list", methods=['GET'])
+def get_dummy_called_list():
+    dummy_data = list(generate_dummy_called_list())
+    return jsonify(dummy_data)
 
 
 if __name__ == '__main__':
